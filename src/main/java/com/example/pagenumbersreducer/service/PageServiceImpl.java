@@ -1,6 +1,7 @@
 package com.example.pagenumbersreducer.service;
 
 import com.example.pagenumbersreducer.exception.PageException;
+import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+@Service
 public class PageServiceImpl implements PageService {
     @Override
     public Set<List<Integer>> reducePageNumber(List<Integer> pages) {
