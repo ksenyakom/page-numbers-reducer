@@ -2,6 +2,7 @@ package com.example.pagenumbersreducer.service;
 
 import com.example.pagenumbersreducer.exception.PageException;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -11,10 +12,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.assertj.core.util.Sets.newLinkedHashSet;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PageServiceImplTest {
 
@@ -35,7 +38,8 @@ class PageServiceImplTest {
         return Stream.of(
                 Arguments.of(newArrayList(7, -1)),
                 Arguments.of(newArrayList(1, 0, 5)),
-                Arguments.of(newArrayList(null, 100, 5))
+                Arguments.of(newArrayList(null, 100, 5)),
+                Arguments.of(newArrayList(-5, 0, null))
         );
     }
 
