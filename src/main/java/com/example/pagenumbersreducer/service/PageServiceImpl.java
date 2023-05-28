@@ -1,6 +1,6 @@
 package com.example.pagenumbersreducer.service;
 
-import com.example.pagenumbersreducer.exception.PageException;
+import com.example.pagenumbersreducer.exception.PageValidationException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -26,16 +26,16 @@ public class PageServiceImpl implements PageService {
 
     private void validatePages(List<Integer> pages) {
         if (CollectionUtils.isEmpty(pages)) {
-            throw new PageException(String.format("Pages must not be null or empty, found %s", pages));
+            throw new PageValidationException(String.format("Pages must not be null or empty, found %s", pages));
         }
 
         if (CollectionUtils.containsInstance(pages, null)) {
-            throw new PageException("Pages must not contain null page number");
+            throw new PageValidationException("Pages must not contain null page number");
         }
 
         Optional<Integer> notValidPageNumber = pages.stream().filter(page -> page <= 0).findAny();
         notValidPageNumber.ifPresent(pageNumber -> {
-            throw new PageException(String.format("Pages must not contain negative or zero page numbers, found %s", pageNumber));
+            throw new PageValidationException(String.format("Pages must not contain negative or zero page numbers, found %s", pageNumber));
         });
     }
 

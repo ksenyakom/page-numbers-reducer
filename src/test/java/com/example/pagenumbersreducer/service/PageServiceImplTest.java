@@ -1,6 +1,6 @@
 package com.example.pagenumbersreducer.service;
 
-import com.example.pagenumbersreducer.exception.PageException;
+import com.example.pagenumbersreducer.exception.PageValidationException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -28,7 +28,7 @@ class PageServiceImplTest {
     @ParameterizedTest
     @NullAndEmptySource
     void reducePageNumber_emptyPages_throwsException(List<Integer> pages) {
-        assertThrows(PageException.class, () -> pageService.reducePageNumber(pages));
+        assertThrows(PageValidationException.class, () -> pageService.reducePageNumber(pages));
     }
 
     private static Stream<Arguments> notValidValues() {
@@ -43,7 +43,7 @@ class PageServiceImplTest {
     @ParameterizedTest
     @MethodSource("notValidValues")
     void reducePageNumber_notValidValues_throwsException(List<Integer> pages) {
-        assertThrows(PageException.class, () -> pageService.reducePageNumber(pages));
+        assertThrows(PageValidationException.class, () -> pageService.reducePageNumber(pages));
     }
 
     private static Stream<Arguments> validValues() {
