@@ -1,6 +1,8 @@
 package com.example.pagenumbersreducer.controller;
 
+import com.example.pagenumbersreducer.model.Pages;
 import com.example.pagenumbersreducer.service.PageService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -10,7 +12,6 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import io.swagger.v3.oas.annotations.Operation;
 
 import java.util.List;
 
@@ -40,11 +41,11 @@ public class PageController {
     public ReducedPagesView reducePages(
             @Parameter(description = "List of page numbers, which need to be reduced")
             @RequestParam(value = "rowPageNumbers")
-            List<Integer> pages) {
-        ReducedPages reducedPages = new ReducedPages();
-        reducedPages.setReduced(pageService.reducePageNumber(pages));
-        reducedPages.setOriginal(pages);
+            List<Integer> originalPages) {
+        Pages pages = new Pages();
+        pages.setReduced(pageService.reducePageNumber(originalPages));
+        pages.setOriginal(originalPages);
 
-        return conversionService.convert(reducedPages, ReducedPagesView.class);
+        return conversionService.convert(pages, ReducedPagesView.class);
     }
 }

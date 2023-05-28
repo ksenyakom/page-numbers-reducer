@@ -1,14 +1,14 @@
 package com.example.pagenumbersreducer.converters;
 
-import com.example.pagenumbersreducer.controller.ReducedPages;
 import com.example.pagenumbersreducer.controller.ReducedPagesView;
+import com.example.pagenumbersreducer.model.Pages;
 import org.springframework.core.convert.converter.Converter;
 
 import java.util.stream.Collectors;
 
-public class PagesToReducedPagesConverter implements Converter<ReducedPages, ReducedPagesView> {
+public class PagesToReducedPagesConverter implements Converter<Pages, ReducedPagesView> {
     @Override
-    public ReducedPagesView convert(ReducedPages source) {
+    public ReducedPagesView convert(Pages source) {
         ReducedPagesView reducedPagesView = new ReducedPagesView();
 
         String original = source.getOriginal().stream()

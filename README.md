@@ -1,6 +1,4 @@
 # Page Numbers Reducer
-***
-
 Reduces given page numbers. For example:
 
 >original pages: 1,4,5,7,8,50
@@ -8,7 +6,6 @@ Reduces given page numbers. For example:
 >reduced pages: 1,4-5,7-8,50
 
 ## Built With
-***
 * Java 17
 * Maven
 * Spring boot 3
@@ -16,7 +13,6 @@ Reduces given page numbers. For example:
 
 
 ## Getting Started
-***
 To get a local copy up and running follow these simple example steps.
 
 1. Install required packages:
@@ -43,14 +39,13 @@ To get a local copy up and running follow these simple example steps.
 ```
 
 ## Usage
-***
 Application provides API for reducing page numbers.
 
 _For examples, please refer to the [Swagger documentation](http://localhost:8080/swagger-ui/index.html )_
 
 
+
 ## Publish Docker images in Docker Hub
-***
 
 Create repository (eg. myrepo) in Docker Hub (//hub.docker.com).
 Enter your username instead [username] in the next line in pom.xml.
