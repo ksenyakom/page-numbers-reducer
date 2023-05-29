@@ -1,6 +1,7 @@
 package com.example.pagenumbersreducer.controller;
 
 import com.example.pagenumbersreducer.model.Pages;
+import com.example.pagenumbersreducer.service.BookService;
 import com.example.pagenumbersreducer.service.PageService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -19,10 +20,12 @@ import java.util.List;
 public class PageController {
 
     private final PageService pageService;
+    private final BookService bookService;
     private final ConversionService conversionService;
 
-    public PageController(PageService pageService, ConversionService conversionService) {
+    public PageController(PageService pageService, BookService bookService, ConversionService conversionService) {
         this.pageService = pageService;
+        this.bookService = bookService;
         this.conversionService = conversionService;
     }
 
@@ -41,10 +44,17 @@ public class PageController {
     public ReducedPagesView reducePages(
             @Parameter(description = "List of page numbers, which need to be reduced")
             @RequestParam(value = "rowPageNumbers")
-            List<Integer> originalPages) {
+            List<Integer> originalPages,
+            @Parameter(description = "Book id")
+            @RequestParam(value = "bookId")
+            Long bookId) {
+
+        bookService.validateBookMaxPage(bookId, originalPages);
+
         Pages pages = new Pages();
         pages.setReduced(pageService.reducePageNumber(originalPages));
         pages.setOriginal(originalPages);
+        pages.setBookId(bookId);
 
         return conversionService.convert(pages, ReducedPagesView.class);
     }

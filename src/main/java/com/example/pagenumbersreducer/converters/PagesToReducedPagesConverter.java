@@ -30,6 +30,7 @@ public class PagesToReducedPagesConverter implements Converter<Pages, ReducedPag
                 .collect(Collectors.joining(","));
 
         reducedPagesView.setReduced(reduced);
+        reducedPagesView.setBookId(source.getBookId().toString());
 
         return reducedPagesView;
     }

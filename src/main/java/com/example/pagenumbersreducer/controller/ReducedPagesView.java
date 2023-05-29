@@ -11,4 +11,7 @@ public class ReducedPagesView {
 
     @Schema(description = "Reduced page numbers list", requiredMode = Schema.RequiredMode.REQUIRED)
     private String reduced;
+
+    @Schema(description = "Book id", requiredMode = Schema.RequiredMode.REQUIRED)
+    private String bookId;
 }

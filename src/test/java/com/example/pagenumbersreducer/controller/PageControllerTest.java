@@ -39,13 +39,15 @@ class PageControllerTest {
         ResultActions resultActions = mockMvc.perform(
                 MockMvcRequestBuilders.get("/reducedPageNumbers")
                         .param("rowPageNumbers", "1, 5, 3, 8, 6")
+                        .param("bookId", "111")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
         );
 
         resultActions.andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.original", is("1,5,3,8,6")))
-                .andExpect(jsonPath("$.reduced", is("1,3,5-6,8")));
+                .andExpect(jsonPath("$.reduced", is("1,3,5-6,8")))
+                .andExpect(jsonPath("$.bookId", is("111")));
     }
 
     @Test
@@ -53,6 +55,7 @@ class PageControllerTest {
         ResultActions resultActions = mockMvc.perform(
                         MockMvcRequestBuilders.get("/reducedPageNumbers")
                                 .param("rowPageNumbers", "-1")
+                                .param("bookId", "12")
                                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 )
                 .andDo(MockMvcResultHandlers.print());

@@ -1,6 +1,7 @@
-package com.example.pagenumbersreducer.service;
+package com.example.pagenumbersreducer.service.impl;
 
 import com.example.pagenumbersreducer.exception.PageValidationException;
+import com.example.pagenumbersreducer.service.PageService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 

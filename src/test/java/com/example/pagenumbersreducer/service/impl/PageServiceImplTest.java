@@ -1,6 +1,7 @@
-package com.example.pagenumbersreducer.service;
+package com.example.pagenumbersreducer.service.impl;
 
 import com.example.pagenumbersreducer.exception.PageValidationException;
+import com.example.pagenumbersreducer.service.PageService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
