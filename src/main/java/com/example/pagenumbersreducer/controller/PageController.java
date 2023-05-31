@@ -43,7 +43,7 @@ public class PageController {
     @GetMapping("/reducedPageNumbers")
     public ReducedPagesView reducePages(
             @Parameter(description = "List of page numbers, which need to be reduced")
-            @RequestParam(value = "rowPageNumbers")
+            @RequestParam(value = "rawPageNumbers")
             List<Integer> originalPages,
             @Parameter(description = "Book id")
             @RequestParam(value = "bookId")

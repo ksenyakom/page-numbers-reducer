@@ -38,7 +38,7 @@ class PageControllerTest {
     void reducePages_validParameter_returnResult() throws Exception {
         ResultActions resultActions = mockMvc.perform(
                 MockMvcRequestBuilders.get("/reducedPageNumbers")
-                        .param("rowPageNumbers", "1, 5, 3, 8, 6")
+                        .param("rawPageNumbers", "1, 5, 3, 8, 6")
                         .param("bookId", "111")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
         );
@@ -54,7 +54,7 @@ class PageControllerTest {
     void reducePages_notValidArgument_returnBadRequest() throws Exception {
         ResultActions resultActions = mockMvc.perform(
                         MockMvcRequestBuilders.get("/reducedPageNumbers")
-                                .param("rowPageNumbers", "-1")
+                                .param("rawPageNumbers", "-1")
                                 .param("bookId", "12")
                                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 )
