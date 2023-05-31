@@ -16,7 +16,7 @@ public class ExceptionControllerAdvice {
     public ResponseEntity<Object> handleException(Exception e) {
         log.error(HANDLED_EXCEPTION, e);
 
-        if (e instanceof PageValidationException) {
+        if ((e instanceof PageValidationException) || (e instanceof IllegalArgumentException)) {
             return ResponseEntity
                     .badRequest()
                     .contentType(MediaType.APPLICATION_JSON)

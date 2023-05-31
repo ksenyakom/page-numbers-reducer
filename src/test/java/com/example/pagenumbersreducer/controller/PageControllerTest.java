@@ -51,6 +51,19 @@ class PageControllerTest {
     }
 
     @Test
+    void reducePages_numberIsTooBig_returnBadRequest() throws Exception {
+        ResultActions resultActions = mockMvc.perform(
+                MockMvcRequestBuilders.get("/reducedPageNumbers")
+                        .param("rawPageNumbers", "1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1000000000000")
+                        .param("bookId", "111")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+        );
+
+        resultActions.andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE));
+    }
+
+    @Test
     void reducePages_notValidArgument_returnBadRequest() throws Exception {
         ResultActions resultActions = mockMvc.perform(
                         MockMvcRequestBuilders.get("/reducedPageNumbers")

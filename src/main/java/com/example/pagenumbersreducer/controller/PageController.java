@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class PageController {
@@ -44,18 +45,32 @@ public class PageController {
     public ReducedPagesView reducePages(
             @Parameter(description = "List of page numbers, which need to be reduced")
             @RequestParam(value = "rawPageNumbers")
-            List<Integer> originalPages,
+            List<String> originalPages,
             @Parameter(description = "Book id")
             @RequestParam(value = "bookId")
             Long bookId) {
 
-        bookService.validateBookMaxPage(bookId, originalPages);
+        var intPages = convertPages(originalPages);
+
+        bookService.validateBookMaxPage(bookId, intPages);
 
         Pages pages = new Pages();
-        pages.setReduced(pageService.reducePageNumber(originalPages));
-        pages.setOriginal(originalPages);
+        pages.setReduced(pageService.reducePageNumber(intPages));
+        pages.setOriginal(intPages);
         pages.setBookId(bookId);
 
         return conversionService.convert(pages, ReducedPagesView.class);
+    }
+
+    private List<Integer> convertPages(List<String> originalPages) {
+        return originalPages.stream()
+                .map(stringNumber -> {
+                    try {
+                        return Integer.valueOf(stringNumber);
+                    } catch (NumberFormatException e) {
+                        throw new IllegalArgumentException(String.format("%s is not valid page number", stringNumber));
+                    }
+                })
+                .collect(Collectors.toList());
     }
 }
